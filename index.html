@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="TACIT converts contacts recorded in demonstrations into training-only spatial supervision for an attention-conditioned dexterous manipulation policy.">
+  <meta name="citation_title" content="TACIT: Tactile Contact Supervision for Spatial Attention in Dexterous Manipulation">
+  <meta name="citation_author" content="Yanhou Lai">
+  <meta name="citation_author" content="Fucai Zhu">
+  <meta name="citation_author" content="Ruiqiang Wang">
+  <meta name="citation_author" content="Koichi Hashimoto">
+  <meta name="citation_publication_date" content="2026/09/21">
+  <meta name="citation_arxiv_id" content="2609.24507">
+  <meta name="citation_pdf_url" content="https://arxiv.org/pdf/2609.24507">
+  <meta name="color-scheme" content="light">
+  <title>TACIT | Tactile Contact Supervision for Spatial Attention</title>
+  <link rel="icon" href="assets/logo/TACIT_logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="site-config.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+<svg class="icon-sprite" aria-hidden="true">
+  <symbol id="icon-paper" viewBox="0 0 24 24"><path d="M7 3.5h7l4 4V20.5H7z"/><path d="M14 3.5v4h4M9.5 12h6M9.5 15.5h6"/></symbol>
+  <symbol id="icon-code" viewBox="0 0 24 24"><path d="m9 7-5 5 5 5M15 7l5 5-5 5M13.5 4.5l-3 15"/></symbol>
+  <symbol id="icon-video" viewBox="0 0 24 24"><rect x="3.5" y="5" width="13" height="14" rx="2"/><path d="m16.5 10 4-2v8l-4-2z"/></symbol>
+  <symbol id="icon-quote" viewBox="0 0 24 24"><path d="M10 8H6.5A2.5 2.5 0 0 0 4 10.5V16h6v-5H7.5M20 8h-3.5a2.5 2.5 0 0 0-2.5 2.5V16h6v-5h-2.5"/></symbol>
+  <symbol id="icon-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></symbol>
+  <symbol id="icon-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m10 8.5 5.5 3.5-5.5 3.5z"/></symbol>
+  <symbol id="icon-expand" viewBox="0 0 24 24"><path d="M8.5 4H4v4.5M15.5 4H20v4.5M20 15.5V20h-4.5M8.5 20H4v-4.5"/></symbol>
+  <symbol id="icon-chevron" viewBox="0 0 24 24"><path d="m8 10 4 4 4-4"/></symbol>
+  <symbol id="icon-up" viewBox="0 0 24 24"><path d="m6 14 6-6 6 6M12 8v11"/></symbol>
+</svg>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <nav class="nav wrap" aria-label="Main navigation">
+    <a class="wordmark" href="#main"><img class="brand-symbol" src="assets/logo/TACIT_logo.svg" width="883" height="726" alt="">TACIT<span aria-hidden="true">.</span></a>
+    <div class="nav-links"><a href="#overview">Overview</a><a href="#method">Method</a><a href="#results">Results</a><a href="#mechanism">Evidence</a><a href="#simulation">Simulation</a></div>
+  </nav>
+</header>
+<main id="main">
+  <section class="hero wrap" aria-labelledby="title">
+    <div class="hero-copy">
+      <p class="acronym-line" aria-label="Tactile Contact Informs Attention"><span>TA</span>ctile <span>C</span>ontact <span>I</span>nforms a<span>T</span>tention</p>
+      <h1 id="title"><span class="title-mark"><img src="assets/logo/TACIT_logo.svg" width="883" height="726" alt="">TACIT</span><span class="sr-only">: </span><span class="title-full">Tactile Contact Supervision for Spatial Attention in Dexterous Manipulation</span></h1>
+      <p class="takeaway">Contacts recorded in demonstrations provide training-only spatial supervision that improves a dexterous policy’s approach to the task object.</p>
+      <div id="author-block" hidden></div>
+      <p id="publication-status" class="publication-status" hidden></p>
+      <div id="resource-links" class="resource-links" aria-label="Project resources"></div>
+      <noscript><p>Enable JavaScript for configurable resources and video playback. The research content and figures are available below.</p></noscript>
+    </div>
+    <figure id="paper-video" class="hero-visual video-figure" data-video="TACIT_Video">
+      <div class="video-shell"></div>
+      <figcaption><span class="label">Paper video</span>Tactile contact supervision for spatial attention.<br>Use the player’s sound control to enable audio.<br><a href="#videos">Watch A2 → TACIT comparisons <span aria-hidden="true">↗</span></a></figcaption>
+    </figure>
+  </section>
+  <div class="concept-strip"><div class="wrap concept-inner"><span>Recorded contact</span><span aria-hidden="true">→</span><span>Training-only spatial target</span><span aria-hidden="true">→</span><span>Learned attention at inference</span></div></div>
+
+  <section id="overview" class="section wrap" aria-labelledby="overview-title">
+    <div class="section-heading"><p class="eyebrow">Overview</p><h2 id="overview-title">Touch teaches where to attend.</h2><p>Contact is observed later in a demonstration. TACIT uses its measured location to supervise attention on preceding camera observations.</p></div>
+    <figure class="paper-figure overview-figure">
+      <a class="figure-link" href="assets/images/tacit_policy_overview_handmade.webp" aria-label="Open full-size TACIT overview figure"><img src="assets/images/tacit_policy_overview_handmade.webp" width="2000" height="1406" loading="lazy" alt="Ball demonstration timeline linking later fingertip contact to spatial supervision on earlier camera points, followed by an inference rollout."><span class="figure-open" aria-hidden="true"><svg class="ui-icon"><use href="#icon-expand"></use></svg></span></a>
+      <figcaption data-caption="tacit_policy_overview_handmade">TACIT overview. In the illustrated ball demonstration, contact at t_c provides training-only supervision for spatial attention at earlier frames t &lt; t_c. Attention is predicted on sampled camera points and projected onto RGB for visualization.</figcaption>
+    </figure>
+    <div class="three-columns stages">
+      <article><span class="stage-label">Demonstration</span><h3>Record ordinary interaction</h3><p>Teleoperation records camera observations, tactile measurements and fingertip kinematics. Contact provides a physical spatial target without per-demonstration manual annotation.</p></article>
+      <article><span class="stage-label warm">Training supervision</span><h3>Look back from contact</h3><p>A contact-centered Gaussian supervises camera-point attention before the selected contact onset. A supervised frame may follow an earlier contact.</p></article>
+      <article><span class="stage-label">Inference</span><h3>Act on current observations</h3><p>The learned attention head conditions closed-loop actions alongside the shared visuotactile encoding. <strong>No hindsight target is used at inference.</strong></p></article>
+    </div>
+    <div class="subsection-heading"><h3>Task overview</h3><p>Real-robot ball placement and peg insertion provide the primary results. Simulation adds controlled diagnostics across tasks and a bimanual extension.</p></div>
+    <figure class="paper-figure"><a class="figure-link" href="assets/images/task_overview.webp" aria-label="Open full-size evaluation-task figure"><img src="assets/images/task_overview.webp" width="2000" height="1093" loading="lazy" alt="Stages of real ball placement and peg insertion, plus simulated fruit placement, peg insertion, cube stacking and bimanual handover."><span class="figure-open" aria-hidden="true"><svg class="ui-icon"><use href="#icon-expand"></use></svg></span></a><figcaption data-caption="task_overview">Evaluation tasks. Real-robot ball placement and peg insertion provide the primary physical-policy results; simulation evaluates three single-arm tasks and bimanual handover. The real and simulated peg tasks are distinct instances. Numbers mark rollout stages.</figcaption></figure>
+  </section>
+
+  <section id="method" class="section tinted" aria-labelledby="method-title"><div class="wrap">
+    <div class="section-heading"><p class="eyebrow">Method</p><h2 id="method-title">From measured contact to policy conditioning.</h2><p>A shared observation encoder and a camera-point attention branch condition a diffusion policy. Only the supervision path needs future contact.</p></div>
+    <figure class="paper-figure"><a class="figure-link" href="assets/images/tacit_policy_architecture.webp" aria-label="Open full-size TACIT architecture"><img src="assets/images/tacit_policy_architecture.webp" width="2000" height="792" loading="lazy" alt="Architecture with a shared visuotactile encoder and camera-point attention pooling feeding the diffusion action head; contact-derived Gaussian targets enter only the training loss."><span class="figure-open" aria-hidden="true"><svg class="ui-icon"><use href="#icon-expand"></use></svg></span></a><figcaption data-caption="tacit_policy_architecture">TACIT architecture. An attention head over camera points supplies a pooled spatial feature alongside the shared visuotactile observation encoding. During training, Gaussian targets derived from tactile contact supervise the camera-point scores. Bimanual control instantiates one attention head per hand.</figcaption></figure>
+    <div class="three-columns method-steps">
+      <article><h3>Contact reconstruction</h3><p>Active tactile taxels and calibrated fingertip poses reconstruct a contact-event onset centroid in the same base/world frame as the camera cloud, without an object pose.</p></article>
+      <article><h3>Gaussian camera-point targets</h3><p>A Gaussian centered at the selected contact centroid provides pointwise targets on sampled camera points. Frame selection checks temporal lead and spatial support.</p></article>
+      <article><h3>Attention-conditioned diffusion</h3><p>The head’s camera-point weights produce a pooled feature, augmented by peak relevance and scaled entropy. The projected summary joins the observation encoding.</p></article>
+    </div>
+    <p class="note">The head scores raw points independently; visual scores are primarily conditioned on base-frame XYZ. The attention weights are a policy-conditioning signal, with no demonstrated semantic object detection or explanatory interpretation.</p>
+    <div class="media-pair method-media"><div><p class="eyebrow warm">Training target</p><h3>The label comes from later contact.</h3><p>This demonstration visualization shows the future-contact Gaussian training target. It is not a policy prediction.</p></div><figure class="video-figure" data-video="ball_future_contact_label"><div class="video-shell"></div><figcaption>Demonstration label visualization. Future contact supplies supervision for preceding observations.</figcaption></figure></div>
+  </div></section>
+
+  <section id="results" class="section wrap" aria-labelledby="results-title">
+    <div class="section-heading"><p class="eyebrow">Primary real-robot benchmark</p><h2 id="results-title">Better approach. Higher task success.</h2><p>Ten demonstrations per task on a Franka FR3 with a LEAP hand and three 9DTact fingertips. The main comparison is input-matched <strong>A2 → TACIT</strong>.</p></div>
+    <div class="result-highlights">
+      <article><p class="label">Ball placement · task success</p><p class="result-number"><span>10.0%</span><span class="result-arrow" aria-label="to">→</span><strong>66.7%</strong></p><p>A2: 3/30 <span aria-hidden="true">·</span> TACIT: 20/30</p></article>
+      <article><p class="label">Peg insertion · task success</p><p class="result-number"><span>20.0%</span><span class="result-arrow" aria-label="to">→</span><strong>73.3%</strong></p><p>A2: 6/30 <span aria-hidden="true">·</span> TACIT: 22/30</p></article>
+    </div>
+    <p class="source-note">Primary evaluated checkpoints; these percentages are not means across training seeds. Source: manuscript Abstract and Table II.</p>
+    <div class="table-scroll" role="region" aria-label="Real-robot reaching and task success" tabindex="0"><table>
+      <caption>Reach and task success are different outcomes · 30 trials per policy per task</caption>
+      <thead><tr><th scope="col">Policy</th><th scope="col">Ball reach</th><th scope="col">Ball success</th><th scope="col">Peg reach</th><th scope="col">Peg success</th></tr></thead>
+      <tbody><tr class="reference-row"><th scope="row">A1 · DP3 <small>Vision-only reference</small></th><td>8/30</td><td>6/30</td><td>14/30</td><td>13/30</td></tr><tr><th scope="row">A2 · 3D VT fusion <small>Input-matched baseline</small></th><td>4/30</td><td>3/30</td><td>6/30</td><td>6/30</td></tr><tr class="ours"><th scope="row">TACIT <small>Contact-supervised attention</small></th><td>30/30</td><td>20/30</td><td>30/30</td><td>22/30</td></tr></tbody>
+    </table></div>
+    <div class="two-columns definitions"><p><strong>Reach:</strong> the palm enters the 150 mm grasp-approach region in the first 12 seconds. TACIT reaches in every trial at these evaluated checkpoints; remaining failures occur after arrival.</p><p><strong>Task success:</strong> the ball is released inside the basket, or the peg remains inserted in the fixture, within the 30-second execution window. Reaching alone does not meet either task criterion.</p></div>
+    <p class="note">A2 and TACIT both use 600 camera points + 900 tactile points. A1 uses 1,500 camera points and is a reference baseline; A1–A2 changes both modality and visual sampling budget, so it is not a controlled tactile ablation.</p>
+    <p class="source-note">Five demonstrated placement regions, with no held-out real spatial split. Pooled counts are descriptive; placements are the independent unit. Observed task success is higher for TACIT than A2 at all five ball regions and four of five peg regions. Sources: manuscript §§4.3–4.4, §5.1; real-placement audit.</p>
+    <div id="videos" class="subsection-heading"><h3>Watch the input-matched comparison</h3><p>Illustrative clips at the same nominal placement, played at 1.5× source speed. Each shows a segment of a recorded trial; aggregate outcomes are reported above.</p></div>
+    <div class="two-columns video-grid">
+      <figure class="video-figure" data-video="ball_a2_vs_tacit"><h4>Ball placement</h4><div class="video-shell"></div><figcaption>3D VT fusion (A2) and TACIT at the same nominal ball position.</figcaption></figure>
+      <figure class="video-figure" data-video="peg_a2_vs_tacit"><h4>Peg insertion</h4><div class="video-shell"></div><figcaption>3D VT fusion (A2) and TACIT at the same nominal peg position.</figcaption></figure>
+    </div>
+    <details class="figure-details"><summary><span>Inspect the real-ball approach trajectories</span><svg class="ui-icon disclosure-icon" aria-hidden="true"><use href="#icon-chevron"></use></svg></summary><figure class="paper-figure compact"><img src="assets/images/three_arm_approach.webp" width="1037" height="1092" loading="lazy" alt="Ball approach curves and palm-offset scatter plots for A1, A2 and TACIT across the primary trials."><figcaption data-caption="three_arm_approach">Ball approach over thirty trials per policy. (a) Mean palm-origin-to-ball-center distance; shading is one standard error, the horizontal dashed line is the 150-mm 3D reach criterion, and the vertical dotted line marks the end of the 12-s reach-assessment window. (b) Horizontal palm offsets at closest 3D approach; rings are 150- and 300-mm references, while counts use the full 3D criterion.</figcaption></figure></details>
+  </section>
+
+  <section id="mechanism" class="section tinted" aria-labelledby="mechanism-title"><div class="wrap">
+    <div class="section-heading"><p class="eyebrow">Mechanism evidence</p><h2 id="mechanism-title">Explicit supervision matters.</h2><p>Three training seeds compare input-matched fusion and architecture-matched attention controls on <strong>real ball placement and simulated peg insertion</strong>. This study does not cover real peg.</p></div>
+    <div class="table-scroll" role="region" aria-label="Three training seed mechanism controls" tabindex="0"><table>
+      <caption>Counts ordered by training seed 1 / 2 / 3 · manuscript Table VI</caption>
+      <thead><tr><th scope="col">Measure</th><th scope="col">A2</th><th scope="col">A2.5</th><th scope="col">TACIT-contact</th><th scope="col">TACIT</th></tr></thead>
+      <tbody><tr><th scope="row">Real ball reached <small>Out of 30 per seed</small></th><td>4, 10, 9</td><td>6, 4, 3</td><td>29, 21, 27</td><td class="ours">30, 27, 26</td></tr><tr><th scope="row">Real ball placed <small>Out of 30 per seed</small></th><td>3, 3, 7</td><td>2, 3, 2</td><td>14, 17, 24</td><td class="ours">20, 15, 19</td></tr><tr><th scope="row">Simulated peg moved <small>Out of 81 per seed</small></th><td>47, 28, 27</td><td>33, 35, 59</td><td>71, 81, 81</td><td class="ours">80, 77, 81</td></tr><tr><th scope="row">Simulated peg inserted <small>Out of 81 per seed</small></th><td>1, 1, 2</td><td>3, 1, 5</td><td>14, 16, 17</td><td class="ours">12, 13, 24</td></tr></tbody>
+    </table></div>
+    <div class="two-columns mechanism-copy"><article><h3>The same head is not enough.</h3><p>A2 has no attention head. A2.5 retains TACIT’s head and policy conditioning with λ<sub>att</sub> = 0. <strong>Its head is still trained by the action loss.</strong> Removing explicit attention supervision does not recover the supervised variants’ count ranges.</p></article><article><h3>Timing: no consistent ordering.</h3><p>TACIT-contact supervises detected contact intervals; TACIT supervises observations preceding the selected onset. There is <strong>no consistent ordering</strong> across three seeds in either domain. The controls limit total supervision-count differences but do not fully match event-level allocation.</p></article></div>
+    <div class="subsection-heading"><h3>Attention peak is near the object.</h3><p>In the displayed real-ball rollout, attention assigns its peak near the task object before tactile activation. This is spatial attention on sampled camera points, evaluated against an independently located geometric ball center.</p></div>
+    <div class="two-columns video-grid">
+      <figure class="video-figure" data-video="ball_attention"><h4>Predicted attention · camera view</h4><div class="video-shell"></div><figcaption>Policy attention projected onto the recorded view, with a fixed scale over the clip. Between stored inference frames, the most recent prediction is held.</figcaption></figure>
+      <figure class="video-figure" data-video="ball_attention_pointcloud_camera"><h4>Predicted attention · policy point cloud</h4><div class="video-shell"></div><figcaption>Predicted camera-point attention weights on all stored policy points, without additional downsampling or spatial clipping. The most recent policy sample is held until the next inference.</figcaption></figure>
+    </div>
+    <details class="figure-details"><summary><span>Inspect the paper’s attention sequence</span><svg class="ui-icon disclosure-icon" aria-hidden="true"><use href="#icon-chevron"></use></svg></summary><figure class="paper-figure compact"><img src="assets/images/rollout_attention.webp" width="725" height="357" loading="lazy" alt="Real-ball attention frames showing peak and centroid errors against the geometric ball center before tactile activation."><figcaption data-caption="rollout_attention">Attention before tactile activation in one real ball rollout. The geometric ball center is independent of the head; titles show peak/centroid errors. Tactile points remain inactive until first contact at 12.6 s.</figcaption></figure></details>
+  </div></section>
+
+  <section id="simulation" class="section wrap" aria-labelledby="simulation-title">
+    <div class="section-heading"><p class="eyebrow">Simulation · controlled diagnostic</p><h2 id="simulation-title">Probe the effect within spatial support.</h2><p>Simulation evaluates task-specific policies and unseen in-hull coordinates. It provides controlled diagnostics of stage progression within the tested workspace; absolute task completion remains limited.</p></div>
+    <div class="media-pair"><div><h3>Unseen coordinates, inside the training hull</h3><p>Held-out simulation uses positions absent from demonstrations but inside each task’s training convex hull. These diagnostics examine object interaction beyond the exact demonstrated coordinates.</p><p>These are stage-progression diagnostics. They do not establish performance outside the demonstrated workspace. No policy is transferred between simulation and hardware.</p><p class="source-note">Source: manuscript §§4.2, 4.4 and 5.2, Table V.</p></div><figure class="video-figure" data-video="sim_peg_attention"><div class="video-shell"></div><figcaption>Illustrative simulated peg attention clip. All stored policy points are projected with the front-camera calibration, with one stored dump per rollout step and no temporal interpolation. This clip does not establish task completion or held-out performance.</figcaption></figure></div>
+    <details class="figure-details"><summary><span>Inspect cross-task completion · manuscript Table IV</span><svg class="ui-icon disclosure-icon" aria-hidden="true"><use href="#icon-chevron"></use></svg></summary><div class="table-scroll" role="region" aria-label="Simulation completion" tabindex="0"><table><caption>Mean ± standard deviation across three evaluation seeds of fixed checkpoints; parentheses give pooled counts. These are not training-seed standard deviations.</caption><thead><tr><th scope="col">Task</th><th scope="col">A1</th><th scope="col">A2</th><th scope="col">TACIT</th></tr></thead><tbody>
+      <tr><th scope="row">Fruit placement</th><td>4.9 ± 1.3% (11/225)</td><td>0.0 ± 0.0% (0/225)</td><td>4.9 ± 2.3% (11/225)</td></tr>
+      <tr><th scope="row">Peg insertion</th><td>2.5 ± 3.5% (2/81)</td><td>1.2 ± 1.7% (1/81)</td><td>14.8 ± 5.2% (12/81)</td></tr>
+      <tr><th scope="row">Cube stack</th><td>5.3 ± 0.0% (12/225)</td><td>10.7 ± 13.2% (24/225)</td><td>20.9 ± 6.7% (47/225)</td></tr>
+      <tr><th scope="row">Bimanual handover <small>Architectural extension</small></th><td>43.3 ± 2.7% (39/90)</td><td>50.0 ± 5.4% (45/90)</td><td>54.4 ± 12.3% (49/90)</td></tr>
+    </tbody></table></div><p>TACIT improves peg and cube success, ties A1 on fruit, and shows no clear advantage on handover. The effect is not uniform across tasks.</p></details>
+  </section>
+
+  <section id="limitations" class="section scope-section" aria-labelledby="scope-title"><div class="wrap scope-layout"><div><p class="eyebrow">Scope &amp; limitations</p><h2 id="scope-title">What the evidence supports.</h2></div><div class="scope-list">
+    <article><h3>Five demonstrated real placement regions</h3><p>Real evaluation measures robustness within demonstrated regions. Held-out simulation tests unseen in-hull coordinates without distractors or object-identity changes.</p></article>
+    <article><h3>A spatial signal with a workspace boundary</h3><p>The primarily coordinate-conditioned head has not been shown to perform semantic object detection. The evidence does not establish generalization outside the training workspace or exclude a coordinate-conditioned lookup over the demonstrated regions.</p></article>
+    <article><h3>Approach is only part of manipulation</h3><p>TACIT primarily improves approach. Grasp stabilization, insertion and release remain unresolved. Eliminating observed pre-arrival failures is limited to the evaluated primary checkpoints.</p></article>
+    <article><h3>Bounded experimental evidence</h3><p>Three-training-seed comparisons cover real ball and simulated peg only. Placements are the independent unit; pooled trial counts are descriptive. All real trials share one operator, arm-hand system and camera placement.</p></article>
+  </div></div></section>
+
+  <section id="citation" class="section wrap citation-section" aria-labelledby="citation-title">
+    <div><p class="eyebrow">Citation</p><h2 id="citation-title">BibTeX</h2><p>Cite the current arXiv preprint. Publication details can be updated after peer review.</p></div>
+    <div class="citation-box"><div class="citation-toolbar"><span id="citation-label">arXiv:2609.24507</span><button id="copy-citation" type="button"><svg class="ui-icon" aria-hidden="true"><use href="#icon-copy"></use></svg><span>Copy BibTeX</span></button></div><pre><code id="bibtex"></code></pre><p id="copy-status" role="status" aria-live="polite"></p></div>
+  </section>
+</main>
+<footer class="wrap footer"><a class="wordmark" href="#main"><img class="brand-symbol" src="assets/logo/TACIT_logo.svg" width="883" height="726" alt="">TACIT<span aria-hidden="true">.</span></a><p>Tactile Contact Supervision for Spatial Attention in Dexterous Manipulation</p><a class="back-to-top" href="#main"><span>Back to top</span><svg class="ui-icon" aria-hidden="true"><use href="#icon-up"></use></svg></a></footer>
+</body>
+</html>

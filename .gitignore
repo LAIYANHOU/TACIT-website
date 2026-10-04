@@ -1,0 +1,5 @@
+assets/source/
+checks/*.png
+checks/*.jpg
+checks/*.json
+__pycache__/
