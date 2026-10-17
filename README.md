@@ -1,11 +1,13 @@
 # TACIT
 
-Project website for:
+Project website for a tactile robot learning paper on contact-supervised spatial attention and dexterous manipulation:
 
 **TACIT: Tactile Contact Supervision for Spatial Attention in Dexterous Manipulation**
 
 - Project page: https://laiyanhou.github.io/TACIT-website/
 - Paper: https://arxiv.org/abs/2609.24507
+
+TACIT converts tactile contacts recorded during robot demonstrations into training-only spatial supervision for an attention-conditioned diffusion policy. The project studies real-robot ball placement and peg insertion, along with controlled simulation diagnostics.
 
 ## Citation
 
