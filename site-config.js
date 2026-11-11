@@ -4,7 +4,7 @@ window.TACIT_CONFIG = {
   showPublicationStatus: false,
   publicationStatus: '',
   authors: ['Yanhou Lai', 'Fucai Zhu', 'Ruiqiang Wang', 'Koichi Hashimoto'],
-  affiliation: 'Graduate School of Information Sciences, Tohoku University, Sendai 980-8579, Japan.',
+  affiliation: 'Tohoku University',
   citationYear: '2026',
   arxivId: '2609.24507',
   arxivClass: 'cs.RO',

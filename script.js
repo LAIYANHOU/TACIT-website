@@ -14,8 +14,14 @@ const createIcon = name => {
 };
 if (config.showAuthors) {
   const block = document.querySelector('#author-block');
-  const names = document.createElement('p');
-  names.textContent = config.authors.join(' · ');
+  const names = document.createElement('ul');
+  names.className = 'author-list';
+  names.setAttribute('aria-label', 'Authors');
+  for (const name of config.authors) {
+    const author = document.createElement('li');
+    author.textContent = name;
+    names.append(author);
+  }
   const affiliation = document.createElement('p');
   affiliation.className = 'affiliation';
   affiliation.textContent = config.affiliation;
